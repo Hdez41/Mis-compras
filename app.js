@@ -19,8 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const li = document.createElement('li');
             if (item.completed) li.classList.add('completed');
 
-            const iconName = item.completed ? 'check_box' : 'check_box_outline_blank';
-            const checkedClass = item.completed ? 'checked' : '';
+ const iconName = item.completed ? '✅' : '🔲'; 
+const checkedClass = item.completed ? 'checked' : '';
 
             li.innerHTML = `
                 <span class="material-icons checkbox-icon ${checkedClass}" onclick="toggleItem(${index})">${iconName}</span>
