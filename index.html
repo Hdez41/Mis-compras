@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Encargos</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Vínculo al manifiesto PWA -->
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Botón de instalación (oculto por defecto) -->
+    <button id="install-btn" style="display: none; width: 100%; margin-bottom: 15px; background-color: #007bff;">
+        📥 Instalar Aplicación
+    </button>
+
+    <div class="todo-container">
+        <h2>📋 Mis Encargos</h2>
+        <div class="input-section">
+            <input type="text" id="task-input" placeholder="Escribe un nuevo encargo...">
+            <button id="add-btn">Agregar</button>
+        </div>
+        <ul id="task-list"></ul>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+
