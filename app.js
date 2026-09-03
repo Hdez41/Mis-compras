@@ -70,18 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =========================================================================
-// 🟢 AQUÍ ESTÁ EL NUEVO CÓDIGO AUTOMÁTICO (Service Worker e Instalación al Primer Toque)
+// 🟢 REGISTRO DEL SERVICE WORKER (Esto activa la instalación automática)
 // =========================================================================
 
-// Asegúrate de que este bloque exacto esté al final de tu app.js
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/Mis-compras/sw.js')
-            .then(() => console.log('Service Worker de Compras activo.'))
-            .catch(err => console.error('Error de registro:', err));
+            .then(() => console.log('Service Worker de Compras activo con éxito.'))
+            .catch(err => console.error('Error al registrar el Service Worker:', err));
     });
 }
 
+// Lógica de instalación al primer toque de pantalla
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
