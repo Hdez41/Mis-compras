@@ -1,10 +1,10 @@
 const CACHE_NAME = 'encargos-v1';
 const ASSETS = [
-  './',
-  './index.html',
-  './style.css',
-  './app.js',
-  './manifest.json'
+  '',
+  'index.html',
+  'style.css',
+  'app.js',
+  'manifest.json'
 ];
 
 // Instalar el Service Worker y guardar archivos en caché
