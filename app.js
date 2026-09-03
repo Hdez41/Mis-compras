@@ -66,30 +66,3 @@ const checkedClass = item.completed ? 'checked' : '';
     renderList();
 });
 
-// 1. Registrar el Service Worker (Obligatorio para que sea instalable)
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('Service Worker listo.'))
-            .catch(err => console.error('Error en Service Worker:', err));
-    });
-}
-
-// 2. Lógica para lanzar la instalación automática al abrir la web
-window.addEventListener('beforeinstallprompt', async (e) => {
-    // Evita que el navegador gestione el banner a su propio ritmo
-    e.preventDefault();
-    
-    // Guarda el evento de instalación
-    const deferredPrompt = e;
-    
-    // Pequeña pausa de 1.5 segundos para dejar que la página cargue visualmente primero
-    setTimeout(async () => {
-        // Muestra la ventana flotante nativa del sistema (Chrome, Edge, Android)
-        deferredPrompt.prompt();
-        
-        // Comprueba si el usuario aceptó o rechazó la instalación
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`El usuario eligió: ${outcome}`);
-    }, 1500); 
-});
