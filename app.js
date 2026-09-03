@@ -73,46 +73,29 @@ document.addEventListener('DOMContentLoaded', () => {
 // 🟢 AQUÍ ESTÁ EL NUEVO CÓDIGO AUTOMÁTICO (Service Worker e Instalación al Primer Toque)
 // =========================================================================
 
-// 1. Registro del Service Worker
+// Asegúrate de que este bloque exacto esté al final de tu app.js
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
-            .then(() => console.log('Service Worker activo.'))
+        navigator.serviceWorker.register('/Mis-compras/sw.js')
+            .then(() => console.log('Service Worker de Compras activo.'))
             .catch(err => console.error('Error de registro:', err));
     });
 }
 
-// 2. Instalación Automática al abrir e interactuar con la app
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Evita el banner por defecto del navegador
     e.preventDefault();
-    // Guarda el evento para usarlo de inmediato
     deferredPrompt = e;
 
-    // TRUCO PARA CHROME: Espera el primer toque del usuario en la pantalla para lanzar la instalación
     const launchAutomaticPrompt = async () => {
         if (!deferredPrompt) return;
-
-        // Muestra la ventana de instalación automáticamente
         deferredPrompt.prompt();
-
-        // Evalúa la respuesta
         const { outcome } = await deferredPrompt.userChoice;
-        console.log(`El usuario decidió: ${outcome}`);
-
-        // Limpia el evento y remueve el escuchador para que no vuelva a activarse
+        console.log(`Instalación automática: ${outcome}`);
         deferredPrompt = null;
         document.removeEventListener('click', launchAutomaticPrompt);
     };
 
-    // Escucha el primer clic o toque en cualquier parte de la app
     document.addEventListener('click', launchAutomaticPrompt);
-});
-
-// Confirmación de éxito
-window.addEventListener('appinstalled', () => {
-    console.log('¡Aplicación instalada exitosamente!');
-    deferredPrompt = null;
 });
