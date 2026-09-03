@@ -1,29 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-        <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🛒 Mi Lista de Compras</title>
     
-    <!-- Asegúrate de tener esta línea exacta para los iconos -->
+    <!-- Configuración para Redes Sociales y WhatsApp (Open Graph) -->
+    <meta property="og:title" content="📋 Mi Lista de Compras">
+    <meta property="og:description" content="Organiza tu súper mercado fácilmente. Guarda tus productos y tachalos en tiempo real.">
+    <!-- REEMPLAZA las URLs de abajo con tus datos reales de GitHub Pages -->
+    <meta property="og:image" content="https://github.io">
+    <meta property="og:image:width" content="300">
+    <meta property="og:image:height" content="300">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:url" content="https://github.io">
+    <meta property="og:type" content="website">
+
+    <!-- Estilos e Iconos -->
+    <link rel="stylesheet" href="style.css">
     <link href="https://googleapis.com" rel="stylesheet">
-    
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="style.css">
-    
 </head>
 <body>
     <div class="app-container">
-    <div class="image-container">
-        <img src="image/Carrito-transformed.png" alt="Mi Foto">
-    </div>
+        
+        <!-- Tu encabezado centrado con foto -->
+        <header class="app-header">
+            <h1>Mis Compras</h1>
+            <div class="image-container">
+                <img src="image/Carrito-transformed.png" alt="Mi Foto">
+            </div>
+            
+        </header>
 
+        <!-- Aquí se pega el botón dedicado para Google Chrome -->
+        <button id="chrome-install-btn" style="display: none; width: 100%; margin-bottom: 20px; background-color: #198754; color: white; padding: 12px; border: none; border-radius: 14px; cursor: pointer; font-weight: bold;">
+            📥 Instalar Aplicación
+        </button>
+
+        <!-- El resto de tu aplicación -->
         <div class="input-container">
-            <input type="text" id="item-input" placeholder="Ej. Leche, Manzanas...">
+            <input type="text" id="item-input" placeholder="Ej. Leche, Huevos, Frutas...">
             <button id="add-btn"><span class="material-icons">add</span></button>
         </div>
 
-        <!-- Lista de productos -->
+        <!-- Contenedor dinámico de la lista -->
         <ul id="shopping-list"></ul>
     </div>
 
