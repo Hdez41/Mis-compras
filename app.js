@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Dibujar la lista en la pantalla
     function renderList() {
         shoppingList.innerHTML = '';
-
+        
         items.forEach((item, index) => {
             const li = document.createElement('li');
             if (item.completed) li.classList.add('completed');
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         items.push({ text: text, completed: false });
         itemInput.value = '';
-
+        
         saveToLocalStorage();
         renderList();
     }
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =========================================================================
-// AQUÍ COMIENZA EL BLOQUE QUE HABÍA QUE REEMPLAZAR (Service Worker e Instalación en Chrome)
+// 🟢 AQUÍ ESTÁ EL NUEVO CÓDIGO AUTOMÁTICO (Service Worker e Instalación al Primer Toque)
 // =========================================================================
 
 // 1. Registro del Service Worker
@@ -82,45 +82,37 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// 2. Lógica de instalación corregida para Google Chrome (Espera al clic en el botón)
+// 2. Instalación Automática al abrir e interactuar con la app
 let deferredPrompt;
-const installBtn = document.getElementById('chrome-install-btn');
 
 window.addEventListener('beforeinstallprompt', (e) => {
-    // Evita que Chrome intente lanzar su propio aviso automáticamente
+    // Evita el banner por defecto del navegador
     e.preventDefault();
-    // Guarda el evento para usarlo en el clic
+    // Guarda el evento para usarlo de inmediato
     deferredPrompt = e;
-    // Muestra nuestro botón personalizado de instalación al usuario
-    if (installBtn) {
-        installBtn.style.display = 'block';
-    }
-});
 
-// El navegador exige que la acción ocurra DENTRO de un evento 'click' provocado por el usuario
-if (installBtn) {
-    installBtn.addEventListener('click', async () => {
+    // TRUCO PARA CHROME: Espera el primer toque del usuario en la pantalla para lanzar la instalación
+    const launchAutomaticPrompt = async () => {
         if (!deferredPrompt) return;
 
-        // Ahora sí, Chrome aprueba el prompt porque viene de un clic directo
+        // Muestra la ventana de instalación automáticamente
         deferredPrompt.prompt();
 
-        // Conoce la respuesta del usuario
+        // Evalúa la respuesta
         const { outcome } = await deferredPrompt.userChoice;
         console.log(`El usuario decidió: ${outcome}`);
 
-        // Limpia la variable y oculta el botón ya que se procesó
+        // Limpia el evento y remueve el escuchador para que no vuelva a activarse
         deferredPrompt = null;
-        installBtn.style.display = 'none';
-    });
-}
+        document.removeEventListener('click', launchAutomaticPrompt);
+    };
 
-// Oculta el botón si el usuario ya la tiene instalada en su dispositivo
-window.addEventListener('appinstalled', () => {
-    console.log('¡Instalación completada con éxito!');
-    if (installBtn) {
-        installBtn.style.display = 'none';
-    }
-    deferredPrompt = null;
+    // Escucha el primer clic o toque en cualquier parte de la app
+    document.addEventListener('click', launchAutomaticPrompt);
 });
 
+// Confirmación de éxito
+window.addEventListener('appinstalled', () => {
+    console.log('¡Aplicación instalada exitosamente!');
+    deferredPrompt = null;
+});
