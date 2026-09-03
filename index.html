@@ -1,46 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
+        <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Compras</title>
-    <!-- Configuración para Redes Sociales y WhatsApp (Open Graph) -->
-    <meta property="og:title" content="📋 Lista de Compras">
-    <meta property="og:description"
-        content="Organiza tus tareas y encargos diarios. ¡Instálala en tu teléfono!">
-    <meta property="og:image" content="https://github.io">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://github.io">
-
-    <!-- Reemplaza 'tu-usuario' y 'nombre-repositorio' con tus datos reales de GitHub -->
-<meta property="og:image" content="https://github.io">
-<meta property="og:image:width" content="300">
-<meta property="og:image:height" content="300">
-<!-- Cambia a image/jpeg si tu foto termina en .jpg -->
-<meta property="og:image:type" content="image/png"> 
-
-
+    <title>🛒 Mi Lista de Compras</title>
+    
+    <!-- Asegúrate de tener esta línea exacta para los iconos -->
+    <link href="https://googleapis.com" rel="stylesheet">
+    
     <link rel="stylesheet" href="style.css">
-    <!-- Vínculo al manifiesto PWA -->
-    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <!-- Botón de instalación (oculto por defecto) -->
-    <button id="install-btn" style="display: none; width: 100%; margin-bottom: 15px; background-color: #007bff;">
-        📥 Instalar Aplicación
-    </button>
-
-    <div class="todo-container">
-        <h2>📋 Mis Compras</h2>
-        <div class="input-section">
-            <input type="text" id="task-input" placeholder="Escribe un nuevo encargo...">
-            <button id="add-btn">Agregar</button>
-        </div>
-        <ul id="task-list"></ul>
+    <div class="app-container">
+    <div class="image-container">
+        <img src="image/Carrito-transformed.png" alt="Mi Foto">
     </div>
+
+        <div class="input-container">
+            <input type="text" id="item-input" placeholder="Ej. Leche, Manzanas...">
+            <button id="add-btn"><span class="material-icons">add</span></button>
+        </div>
+
+        <!-- Lista de productos -->
+        <ul id="shopping-list"></ul>
+    </div>
+
     <script src="app.js"></script>
 </body>
-
 </html>
