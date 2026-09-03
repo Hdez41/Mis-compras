@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // 3. Dibujar la lista en la pantalla
     function renderList() {
         shoppingList.innerHTML = '';
-        
+
         items.forEach((item, index) => {
             const li = document.createElement('li');
             if (item.completed) li.classList.add('completed');
 
- const iconName = item.completed ? '✅' : '🔲'; 
-const checkedClass = item.completed ? 'checked' : '';
+            const iconName = item.completed ? '✅' : '🔲';
+            const checkedClass = item.completed ? 'checked' : '';
 
             li.innerHTML = `
                 <span class="material-icons checkbox-icon ${checkedClass}" onclick="toggleItem(${index})">${iconName}</span>
@@ -40,7 +40,7 @@ const checkedClass = item.completed ? 'checked' : '';
 
         items.push({ text: text, completed: false });
         itemInput.value = '';
-        
+
         saveToLocalStorage();
         renderList();
     }
@@ -101,14 +101,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
 if (installBtn) {
     installBtn.addEventListener('click', async () => {
         if (!deferredPrompt) return;
-        
+
         // Ahora sí, Chrome aprueba el prompt porque viene de un clic directo
         deferredPrompt.prompt();
-        
+
         // Conoce la respuesta del usuario
         const { outcome } = await deferredPrompt.userChoice;
         console.log(`El usuario decidió: ${outcome}`);
-        
+
         // Limpia la variable y oculta el botón ya que se procesó
         deferredPrompt = null;
         installBtn.style.display = 'none';
